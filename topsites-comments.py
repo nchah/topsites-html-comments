@@ -2,9 +2,33 @@
 """ Project Topsites HTML Comments - Collecting comments in HTML code for the Top 500 Sites
 as ranked by Alexa.com """
 
-import requests
 from bs4 import BeautifulSoup, Comment
+import click
 import json
+import requests
+
+
+@click.command()
+@click.option('--site', help='The HTTP web address')
+
+def get_html_comments(site):
+    """
+    Used as a CLI tool. Usage in command line:
+    $ python3 topsites-comments.py --site=http://facebook.com
+    """
+    try:
+        r = requests.get(site)
+        click.echo("Request Sent.")
+        soup = BeautifulSoup(r.text, "html.parser")
+        click.echo("Getting HTML comments.\n")
+        comments = soup.find_all(text=lambda text: isinstance(text, Comment))
+        comment_counter = 1
+        total_comments = len(comments)
+        for comment in comments:
+            click.echo("COMMENT #{}/{}".format(comment_counter, total_comments) + ": " + comment + "\n")
+            comment_counter += 1
+    except:
+        click.echo("Request Failed.")
 
 
 def scrape_topsites(start_page=0, end_page=20):
@@ -125,3 +149,6 @@ def analyze_comments():
 
         num += 1
 
+
+if __name__ == '__main__':
+    get_html_comments()
