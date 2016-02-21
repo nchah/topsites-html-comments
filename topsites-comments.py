@@ -10,7 +10,6 @@ import requests
 
 @click.command()
 @click.option('--site', help='The HTTP web address')
-
 def get_html_comments(site):
     """
     Used as a CLI tool. Usage in command line:

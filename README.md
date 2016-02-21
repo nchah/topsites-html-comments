@@ -3,7 +3,7 @@ A script to create a collection of the comments left in the HTML code of various
 
 
 ## Background ##
-Further background in https://coderecipes.wordpress.com/2016/01/05/top-sites-html-comments/
+Further background in https://blog.nielchah.com/2016/01/05/top-sites-html-comments/
 
 
 ## Brief Description ##
